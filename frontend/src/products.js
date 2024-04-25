@@ -71,6 +71,7 @@ const Product = () => {
       <table>
         <thead>
           <tr>
+            <th>ProductID</th>
             <th>Product Name</th>
             <th>Description</th>
             <th>Category</th>
@@ -83,6 +84,7 @@ const Product = () => {
         <tbody>
           {products.map((product) => (
             <tr key={product.ProductID}>
+              <td>{product.ProductID}</td>
               <td>{product.ProductName}</td>
               <td>{product.Description}</td>
               <td>{product.Category}</td>
