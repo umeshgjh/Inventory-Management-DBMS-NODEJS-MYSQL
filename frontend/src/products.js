@@ -12,6 +12,7 @@ const Product = () => {
     Price: '',
     QuantityInStock: '',
   });
+  const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
     fetchProducts();
@@ -47,10 +48,19 @@ const Product = () => {
     }
   };
 
+  const handleEditProduct = (product) => {
+    setEditingProduct(product);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingProduct(null);
+  };
+
   const handleUpdateProduct = async (product) => {
     try {
       await axios.put(`http://localhost:5000/api/Products/${product.ProductID}`, product);
       fetchProducts();
+      setEditingProduct(null); // Reset editing state after successful update
     } catch (error) {
       console.error('Error updating product:', error);
     }
@@ -85,14 +95,39 @@ const Product = () => {
           {products.map((product) => (
             <tr key={product.ProductID}>
               <td>{product.ProductID}</td>
-              <td>{product.ProductName}</td>
-              <td>{product.Description}</td>
+              <td>{editingProduct && editingProduct.ProductID === product.ProductID ? (
+                <input
+                  type="text"
+                  name="ProductName"
+                  value={editingProduct.ProductName}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, ProductName: e.target.value })}
+                />
+              ) : (
+                product.ProductName
+              )}</td>
+              <td>{editingProduct && editingProduct.ProductID === product.ProductID ? (
+                <input
+                  type="text"
+                  name="Description"
+                  value={editingProduct.Description}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, Description: e.target.value })}
+                />
+              ) : (
+                product.Description
+              )}</td>
               <td>{product.Category}</td>
               <td>{product.SupplierID}</td>
               <td>{product.Price}</td>
               <td>{product.QuantityInStock}</td>
               <td>
-                <button onClick={() => handleUpdateProduct(product)}>Update</button>
+                {editingProduct && editingProduct.ProductID === product.ProductID ? (
+                  <div>
+                    <button onClick={() => handleUpdateProduct(editingProduct)}>Save</button>
+                    <button onClick={handleCancelEdit}>Cancel</button>
+                  </div>
+                ) : (
+                  <button onClick={() => handleEditProduct(product)}>Edit</button>
+                )}
                 <button onClick={() => handleDeleteProduct(product.ProductID)}>Delete</button>
               </td>
             </tr>
