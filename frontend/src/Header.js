@@ -1,17 +1,24 @@
-// Header.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
   return (
-    <header className="Header">
+    <header className="header"> {/* Change className to "header" */}
       <nav>
-        <ul className="NavList">
-          <li className="NavItem"><Link to="/" className="NavLink">Home</Link></li>
-          <li className="NavItem"><Link to="/about" className="NavLink">About</Link></li>
-          <li className="NavItem"><Link to="/login" className="NavLink">Login</Link></li>
-          <li className="NavItem"><Link to="/register" className="NavLink">Register</Link></li>
+        <ul className="nav-list"> {/* Change className to "nav-list" */}
+          <li className="nav-item"> {/* Change className to "nav-item" */}
+            <Link to="/" className="nav-link">Home</Link> {/* Change className to "nav-link" */}
+          </li>
+          <li className="nav-item">
+            <Link to="/about" className="nav-link">About</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/login" className="nav-link">Login</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/register" className="nav-link">Register</Link>
+          </li>
         </ul>
       </nav>
     </header>
