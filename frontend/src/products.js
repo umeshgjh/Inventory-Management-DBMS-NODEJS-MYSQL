@@ -117,8 +117,26 @@ const Product = () => {
               )}</td>
               <td>{product.Category}</td>
               <td>{product.SupplierID}</td>
-              <td>{product.Price}</td>
-              <td>{product.QuantityInStock}</td>
+              <td>{editingProduct && editingProduct.ProductID === product.ProductID ? (
+                <input
+                  type="text"
+                  name="Price"
+                  value={editingProduct.Price}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, Price: e.target.value })}
+                />
+              ) : (
+                product.Price
+              )}</td>
+              <td>{editingProduct && editingProduct.ProductID === product.ProductID ? (
+                <input
+                  type="text"
+                  name="QuantityInStock"
+                  value={editingProduct.QuantityInStock}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, QuantityInStock: e.target.value })}
+                />
+              ) : (
+                product.QuantityInStock
+              )}</td>
               <td>
                 {editingProduct && editingProduct.ProductID === product.ProductID ? (
                   <div>
