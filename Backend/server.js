@@ -8,17 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'London@2004',
-  database: 'project',
-  port: 3306,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
-
+// connect it
 
 // API endpoint to fetch all products
 app.get('/api/Products', async (req, res) => {
